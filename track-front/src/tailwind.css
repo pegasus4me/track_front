@@ -16,8 +16,8 @@ body {
          var(--d) 
          var(--d), 
          
-      #f0f0f0 calc(var(--d) - 1px), 
-      #0000 var(--d)
+      #eeeeee calc(var(--d) - 1px), 
+      #810b0b00 var(--d)
     ) 
     0 0 / 50px 50px;
  }
