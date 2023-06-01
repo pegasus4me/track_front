@@ -1,11 +1,11 @@
 import React from 'react';
 
-const Task = () => {
+const Structure = () => {
     return (
         <div>
-            <h1>DDD</h1>
+            
         </div>
     );
 }
 
-export default Task;
+export default Structure;

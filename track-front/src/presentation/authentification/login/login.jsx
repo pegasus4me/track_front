@@ -21,6 +21,7 @@ const Login = () => {
       console.log(error)
     }
   };
+
   if(redirect) return <Navigate to="/" />
   
   return (
