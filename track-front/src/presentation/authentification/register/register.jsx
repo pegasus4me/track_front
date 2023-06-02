@@ -70,8 +70,8 @@ const Register = () => {
           <option value="">Pick your timezone</option>
           <option value="Europe/paris">Europe/paris</option>
           <option value="Asie/Tokyo">Asie/Tokyo</option>
-          <option value=" america/New_york">america/New york</option>
-          <option value=" america/Los_angeles">america/Los angeles</option>
+          <option value=" america/New_york">America/New york</option>
+          <option value=" america/Los_angeles">America/Los angeles</option>
         </select>
         <input
           type="submit"
