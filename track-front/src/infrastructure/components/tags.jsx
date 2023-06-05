@@ -11,7 +11,7 @@ const Tags = ({selectedTag}) => {
     onClick={selectedTag}
     >
          
-     <option value=""></option>   
+     <option value="" className="text-gray-200">chose an option</option>   
       <option value="programming">programming</option>
       <option value="study">study</option>
       <option value="sport">sport</option>

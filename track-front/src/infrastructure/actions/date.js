@@ -5,11 +5,13 @@ export function setDate(timezone) {
     const date = new Date();
     // appel lib moment pour formatage date
     const momentDate = moment(date).tz(timezone)
-    const hours = momentDate.format("HH")
+    const day  =    momentDate.format("YYYY-MM-DD"); 
+    const hours =   momentDate.format("HH")
     const minutes = momentDate.format("mm")
     const seconds = momentDate.format("ss")
 
     return {
+        day,
         hours,
         minutes,
         seconds

@@ -3,7 +3,7 @@ let tokenStorage = `Bearer ${localStorage.getItem("token")}`;
 
 export async function addNewTask(data){
     try {
-        const res  = await axios.post("http://localhost:4000/api/v1/track_time/add", data, {
+        const res  = await axios.post("http://localhost:4000/api/v2/track_time/add", data, {
             headers: {
                 "x-access-token": tokenStorage,
             },
@@ -12,6 +12,19 @@ export async function addNewTask(data){
     } catch (error) {
         return error
     }
+}
+
+export async function getAllTask(){
+        try {
+            const res =  await axios.get('http://localhost:4000/api/v1/track_time/all_data', {
+                headers: {
+                        "x-access-token": tokenStorage,
+                },
+            })    
+            return res.data     
+        } catch (error) {
+            return error
+        }
 }
 
 export async function getTaskById(track_id){

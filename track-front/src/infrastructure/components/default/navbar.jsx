@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import Logo from "../../application/assets/Vector.png";
+import Logo from "../../../application/assets/Vector.png";
 import { Link } from "react-router-dom";
-import { checkAuth } from "../api/auth";
-import { getUserData } from "../api/auth";
+import { checkAuth } from "../../api/auth";
+import { getUserData } from "../../api/auth";
 import { set } from "react-hook-form";
 
 const Navbar = () => {

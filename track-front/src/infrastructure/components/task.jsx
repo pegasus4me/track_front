@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import StartButton from "./Startbutton";
-import StopButton from "./StopButton";
+import StartButton from "./Start.button";
+import StopButton from "./Stop.Button";
 import { useStopwatch } from "react-timer-hook";
 import Tags from "./tags";
 import { setDate } from "../actions/date";
@@ -8,32 +8,32 @@ import { getUserData } from "../api/auth";
 import { getTimeDifference } from "../actions/date";
 import { addNewTask } from "../api/task";
 const Task = () => {
-  const { seconds, minutes, hours, days, isRunning, start, pause, reset } = useStopwatch({ autoStart: false });
+  const { seconds, minutes, hours, days, isRunning, start, pause, reset } =
+    useStopwatch({ autoStart: false });
+
   const [taskName, setTaskName] = useState("");
   const [tag, setTag] = useState("");
   const [timeStart, setTimeStart] = useState("");
-
+  const [date, setDates] = useState("");
+  
   const stop = async () => {
     try {
-
       const getUserTimeZone = await getUserData();
       let dates = setDate(getUserTimeZone.timezone);
       let timeEnd = `${dates.hours}:${dates.minutes}:${dates.seconds}`;
       let diff = getTimeDifference(timeStart, timeEnd);
-      
+
       let data = {
-        notes: taskName,
+        time_start: `${date} ${timeStart}`,
+        time_end: `${dates.day} ${timeEnd}`,
         time_spend: `${diff.hours}:${diff.minutes}:${diff.seconds}`,
         timezone: getUserTimeZone.timezone,
+        notes: taskName,
         tag: tag,
-        time_start: timeStart,
-        time_end: timeEnd,
       };
-      const addNewTaskToDB = await addNewTask(data);
-      console.log(addNewTaskToDB);
+      await addNewTask(data);
       reset(); // Réinitialise le compteur
       pause(); // Arrête le compteur
-      // return addNewTaskToDB;
     } catch (error) {
       console.log(error);
     }
@@ -43,6 +43,7 @@ const Task = () => {
     try {
       const getUserTimeZone = await getUserData();
       let dates = setDate(getUserTimeZone.timezone);
+      setDates(dates.day);
       setTimeStart(`${dates.hours}:${dates.minutes}:${dates.seconds}`);
       reset(); // Réinitialise le compteur
       start();
