@@ -7,6 +7,8 @@ import { setDate } from "../actions/date";
 import { getUserData } from "../api/auth";
 import { getTimeDifference } from "../actions/date";
 import { addNewTask } from "../api/task";
+import toast, { Toaster } from "react-hot-toast";
+
 const Task = () => {
   const { seconds, minutes, hours, days, isRunning, start, pause, reset } =
     useStopwatch({ autoStart: false });
@@ -15,7 +17,6 @@ const Task = () => {
   const [tag, setTag] = useState("");
   const [timeStart, setTimeStart] = useState("");
   const [date, setDates] = useState("");
-  
   const stop = async () => {
     try {
       const getUserTimeZone = await getUserData();
@@ -34,6 +35,7 @@ const Task = () => {
       await addNewTask(data);
       reset(); // Réinitialise le compteur
       pause(); // Arrête le compteur
+      toast.success("Task added successfully");
     } catch (error) {
       console.log(error);
     }
@@ -47,6 +49,7 @@ const Task = () => {
       setTimeStart(`${dates.hours}:${dates.minutes}:${dates.seconds}`);
       reset(); // Réinitialise le compteur
       start();
+      toast.success("Task created successfully");
     } catch (error) {
       console.log(error);
     }
@@ -76,6 +79,7 @@ const Task = () => {
           <StartButton startTime={startTime} />
         )}
       </div>
+      <Toaster position="top-left" reverseOrder={false} />
     </div>
   );
 };
