@@ -25,7 +25,7 @@ const Tasks = () => {
     try {
       const res = await deleteTaskById(id);
       if (res.msg === "row deleted") {
-        toast.success("Task deleted successfully");
+        toast.success("Task deleted successfully 🍃");
 
         getTasks();
       }
@@ -60,7 +60,7 @@ const Tasks = () => {
           </p>
         )}
       </Container>
-      <Toaster position="top-left" reverseOrder={false} />
+      <Toaster position="bottom-left" reverseOrder={false} />
     </div>
   );
 };

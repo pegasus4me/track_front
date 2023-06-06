@@ -16,12 +16,14 @@ const Task = () => {
   const [taskName, setTaskName] = useState("");
   const [tag, setTag] = useState("");
   const [timeStart, setTimeStart] = useState("");
-  const [date, setDates] = useState("");
+  const [date, setDates] = useState("");  // format YYYY-MM-DD
   const stop = async () => {
     try {
       const getUserTimeZone = await getUserData();
       let dates = setDate(getUserTimeZone.timezone);
+     
       let timeEnd = `${dates.hours}:${dates.minutes}:${dates.seconds}`;
+      console.log("sss" ,timeEnd)
       let diff = getTimeDifference(timeStart, timeEnd);
 
       let data = {
@@ -79,7 +81,7 @@ const Task = () => {
           <StartButton startTime={startTime} />
         )}
       </div>
-      <Toaster position="top-left" reverseOrder={false} />
+      <Toaster position="bottom-left" reverseOrder={false} />
     </div>
   );
 };
