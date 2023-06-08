@@ -15,6 +15,7 @@ const Tasks = () => {
   const getTasks = async () => {
     try {
       let res = await getAllTask();
+      console.log(res)
       setTasks(res);
     } catch (error) {
       console.log("err", error);
@@ -40,7 +41,6 @@ const Tasks = () => {
         <Task />
       </div>
       {/* current week task done */}
-
       <Container>
         {tasks.msg !== "User doesn't have data" ? (
           tasks.map((task) => (

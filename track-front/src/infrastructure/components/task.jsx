@@ -7,23 +7,36 @@ import { setDate } from "../actions/date";
 import { getUserData } from "../api/auth";
 import { getTimeDifference } from "../actions/date";
 import { addNewTask } from "../api/task";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  startTimer,
+  stopTimer,
+  selectTimer,
+  incrementTimer,
+} from "../../application/libs/redux/time";
 import toast, { Toaster } from "react-hot-toast";
 
 const Task = () => {
-  const { seconds, minutes, hours, days, isRunning, start, pause, reset } =
-    useStopwatch({ autoStart: false });
 
+  const { seconds, minutes, hours, isRunning, start, pause, reset } =useStopwatch({ autoStart: false });
+  const dispatch = useDispatch();
+  const heure = useSelector(selectTimer);
   const [taskName, setTaskName] = useState("");
   const [tag, setTag] = useState("");
   const [timeStart, setTimeStart] = useState("");
-  const [date, setDates] = useState("");  // format YYYY-MM-DD
+  const [date, setDates] = useState(""); // format YYYY-MM-DD
+
+  useEffect(() => {
+    dispatch(startTimer({ hours, minutes, seconds }));
+    // dispatch(incrementTimer());
+    console.log(heure)
+
+  }, [dispatch, isRunning, hours, minutes, seconds]);
   const stop = async () => {
     try {
       const getUserTimeZone = await getUserData();
       let dates = setDate(getUserTimeZone.timezone);
-     
       let timeEnd = `${dates.hours}:${dates.minutes}:${dates.seconds}`;
-      console.log("sss" ,timeEnd)
       let diff = getTimeDifference(timeStart, timeEnd);
 
       let data = {
@@ -34,7 +47,9 @@ const Task = () => {
         notes: taskName,
         tag: tag,
       };
+
       await addNewTask(data);
+      // dispatch(stopTimer());
       reset(); // Réinitialise le compteur
       pause(); // Arrête le compteur
       toast.success("Task added successfully");
@@ -49,6 +64,7 @@ const Task = () => {
       let dates = setDate(getUserTimeZone.timezone);
       setDates(dates.day);
       setTimeStart(`${dates.hours}:${dates.minutes}:${dates.seconds}`);
+      
       reset(); // Réinitialise le compteur
       start();
       toast.success("Task created successfully");
