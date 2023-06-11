@@ -28,10 +28,9 @@ const Task = () => {
 
   useEffect(() => {
     dispatch(startTimer({ hours, minutes, seconds }));
-    // dispatch(incrementTimer());
-    console.log(heure)
-
+    // dispatch(incrementTimer({ hours, minutes, seconds }));
   }, [dispatch, isRunning, hours, minutes, seconds]);
+  
   const stop = async () => {
     try {
       const getUserTimeZone = await getUserData();
@@ -47,7 +46,6 @@ const Task = () => {
         notes: taskName,
         tag: tag,
       };
-
       await addNewTask(data);
       // dispatch(stopTimer());
       reset(); // Réinitialise le compteur

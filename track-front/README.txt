@@ -22,3 +22,5 @@ SRC
     - recuperer toutes les task via user_id 
     - trier par date et les display sur tasks
     
+
+    :: le redux sert a rien dans l'app pour l'instat partie task et gestion du temps

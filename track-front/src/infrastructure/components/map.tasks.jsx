@@ -31,7 +31,7 @@ const Tasks = ({
         <span>{timeSpend}</span>
       </div>
       <div className=" flex gap-4 text-lg justify-end">
-        <button onClick={showEditPopUp}><FiEdit className="cursor-pointer text-indigo-300" /></button>
+        <button onClick={() => showEditPopUp()}><FiEdit className="cursor-pointer text-indigo-300" /></button>
         <button onClick={() => deleteTask()} ><FiTrash2 className="cursor-pointer text-red-300" /></button>
       </div>
     </div>
