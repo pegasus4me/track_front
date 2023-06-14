@@ -39,9 +39,9 @@ export async function getTaskById(track_id){
         return error
     }
 }
-export async function updateTaskById(track_id) {
+export async function updateTaskById(track_id, data) {
     try {
-        const res = await axios.put(`http://localhost:4000/api/v1/track_time/update/${track_id}`, {
+        const res = await axios.put(`http://localhost:4000/api/v1/track_time/update/${track_id}`, data,  {
             headers: {
                 "x-access-token": tokenStorage,
             },
