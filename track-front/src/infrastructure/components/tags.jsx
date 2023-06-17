@@ -10,7 +10,6 @@ const Tags = ({selectedTag}) => {
     <select className="focus:outline-none text-indigo-500 p-2"
     onClick={selectedTag}
     >
-         
      <option value="" className="text-gray-200">chose an option</option>   
       <option value="programming">programming</option>
       <option value="study">study</option>

@@ -17,10 +17,10 @@ import {
 import toast, { Toaster } from "react-hot-toast";
 
 const Task = () => {
-  // check this 
+  // check thise 
   const { seconds, minutes, hours, isRunning, start, pause, reset } =useStopwatch({ autoStart: false });
-  const dispatch = useDispatch();
-  const heure = useSelector(selectTimer);
+    const dispatch = useDispatch();
+    const heure = useSelector(selectTimer);
   const [taskName, setTaskName] = useState("");
   const [tag, setTag] = useState("");
   const [timeStart, setTimeStart] = useState("");
@@ -46,6 +46,8 @@ const Task = () => {
         notes: taskName,
         tag: tag,
       };
+
+      console.log('donnes',data)
       await addNewTask(data);
       // dispatch(stopTimer());
       reset(); // Réinitialise le compteur

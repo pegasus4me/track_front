@@ -2,9 +2,12 @@ import React from 'react';
 
 const Dashboard = () => {
     return (
-        <div>
-            <h1>Dashboard</h1>
-        </div>
+        <>
+           <div className='w-full'>
+            <h2 className='text-center mt-5 text-2xl font-medium text-gray-800'>User Reports 📈</h2>
+
+           </div>
+        </>
     );
 }
 

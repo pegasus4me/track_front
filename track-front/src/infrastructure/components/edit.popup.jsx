@@ -2,45 +2,44 @@ import React, { useEffect, useState } from "react";
 import { getAllTask } from "../api/task";
 import { AiOutlineCloseCircle } from "react-icons/ai";
 import { updateTaskById } from "../api/task";
+import { convertDate } from "../actions/date";
 import Tags from "./tags";
-const Edit = ({ currentTaskId, closeModal, update, currentTask }) => {
-  // function qui recupere un id en function de la task sur la quelle j'ai cliqué
-  
-  
+import toast, { Toaster } from "react-hot-toast";
+
+const Edit = ({ currentTaskId, closeModal, currentTask }) => {
   const [taskName, setTaskName] = useState("");
-  const [hour, setHour] = useState("")
-  const [minute , setMinute] = useState("")
-  const [second, setSecond] = useState("")
-  const [tag, setTag] = useState("")
-  const [timeZone, setTimeZone] = useState("")
-  const [start, setStart] = useState("")
-  const [end, setEnd] = useState("")
+  const [hour, setHour] = useState("");
+  const [minute, setMinute] = useState("");
+  const [second, setSecond] = useState("");
+  const [tag, setTag] = useState("");
+  const [timeZone, setTimeZone] = useState("");
+  const [start, setStart] = useState("");
+  const [end, setEnd] = useState("");
 
   useEffect(() => {
-    setTimeZone(currentTask.timezone)
-    setStart(currentTask.time_start)
-    setEnd(currentTask.time_end)
-    console.log(currentTask)
-  },[])
+    setTimeZone(currentTask.timezone);
+    setStart(currentTask.time_start);
+    setEnd(currentTask.time_end);
+  }, []);
 
   const updateTask = async () => {
     try {
-    
       let updatetedTask = {
-        notes : taskName,
-        tag : tag,
-        time_spend : `${hour}:${minute}:${second}`,
-        time_start : start,
-        time_end : end,
-        timezone : timeZone,
-      }
-      // passer la MAJ sur le la route de modification
-       const updateData = await updateTaskById(currentTaskId, updatetedTask)
-      console.log('dsd',updateData)
+        notes: taskName,
+        tag: tag,
+        time_spend: `${hour}:${minute}:${second}`,
+        time_start: convertDate(start),
+        time_end: convertDate(end),
+        timezone: timeZone,
+      };
+      const updateData = await updateTaskById(currentTaskId, updatetedTask);
+      
+      if (updateData.msg === "row aupdated") return toast.success("Task update successfully ");
+        else return toast.error("un error occured");
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">

@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link } from "react-router-dom";
 
-const Structure = ({email, username, role, timezone}) => {
+const Structure = ({email, username, role, timezone, values}) => {
+    console.log(values)
     return (
         <div className="max-w-[70%] m-auto">
             <Link to="/tasks" className="inline-flex items-center font-medium text-blue-600  hover:underline p-2 mb-6 mt-2">tasks</Link>
@@ -9,6 +10,14 @@ const Structure = ({email, username, role, timezone}) => {
             <div className="grid grid-cols-5 grid-rows-5 gap-4 p-3">
                 <div className="row-span-4 border border-slate-300 bg-indigo-100 rounded-md hover:shadow-md">
                     <h4 className="font-display text-center text-slate-600 p-1 text-lg"> 📀 tags</h4>
+                    {Array.isArray(values) && values.length !== 0 ? (
+                        values.map((val) => {
+                            return <div>
+                                <p className='text-center font-medium text-blue-500'># {val.tag}</p>
+                            </div>
+                        })
+                    ): <p>no tags</p>}
+
                 </div>
                 <div className="col-span-3 row-span-4 border rounded-md hover:shadow-md p-2">
                     <h1 className="font-display text-center text-slate-600 p-1 text-xl mb-4">Profile informations 🌐</h1>
@@ -40,6 +49,13 @@ const Structure = ({email, username, role, timezone}) => {
                 </div>
                 <div className="row-span-4 col-start-5 border rounded-md border-slate-300 bg-indigo-100 hover:shadow-md">
                     <h4 className="font-display text-center text-slate-600 p-1 text-lg"> 💫 tasks</h4>
+                    {Array.isArray(values) && values.length !== 0 ? (
+                        values.map((val) => {
+                            return <div>
+                                <p className='text-center font-medium text-blue-500'># {val.notes}</p>
+                            </div>
+                        })
+                    ): <p>no tags</p>}
                 </div>
             </div>
         </div>

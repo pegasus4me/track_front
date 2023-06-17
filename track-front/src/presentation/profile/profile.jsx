@@ -1,14 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { getUserData } from "../../infrastructure/api/auth";
+import { getAllTask } from "../../infrastructure/api/task";
 import Structure from "./structure";
 const Profile = () => {
+
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [timezone, setTimezone] = useState("");
   const [role, setRole] = useState("");
+  const [task, setTask] = useState([])
+  
 
   useEffect(() => {
     getName();
+    getTasks();
   }, []);
 
   async function getName() {
@@ -18,13 +23,19 @@ const Profile = () => {
     setTimezone(getName.timezone);
     setRole(getName.role);
   }
-  return (
+  async function getTasks() {
+       const task = await getAllTask()
+       setTask(task)
+
+  }
+    return (
     <>
       <Structure
         username={name}
         email={email}
         timezone={timezone}
         role={role}
+        values={task}
       />
     </>
   );
