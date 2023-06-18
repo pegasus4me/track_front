@@ -9,14 +9,11 @@ import { totalSpend } from "../../infrastructure/actions/totalTimeSpend";
 import Popup from "../../infrastructure/components/edit.popup";
 const Tasks = () => {
   const [tasks, setTasks] = useState([]);
-  console.log("task currently on my memory", tasks)
   const [currentTaskId, setCurrentTaskId] = useState([]);
   const [currentTask, setCurrentTask] = useState([]);
   const [showPopup, setShowPopup] = useState(false);
 
-
-    let total = totalSpend(tasks);
-
+  let total = totalSpend(tasks);
 
   useEffect(() => {
     getTasks();
@@ -27,7 +24,7 @@ const Tasks = () => {
       let res = await getAllTask();
       setTasks(res);
     } catch (error) {
-      throw new Error('error getTasks', error)
+      throw new Error("error getTasks", error);
     }
   };
 
@@ -39,15 +36,16 @@ const Tasks = () => {
         getTasks();
       }
     } catch (error) {
-      throw new Error('error deleteOne', error)
+      throw new Error("error deleteOne", error);
     }
   }, []);
 
   /**
    * edit task by id
    */
-  const updateOne = useCallback( async (id) => {
-     const findOneTask = tasks.find((task) => task.id === id);
+  const updateOne = useCallback(
+    async (id) => {
+      const findOneTask = tasks.find((task) => task.id === id);
       setCurrentTaskId(findOneTask.id);
       setCurrentTask(findOneTask);
       setShowPopup(true);
@@ -60,7 +58,6 @@ const Tasks = () => {
       <div className="mt-5">
         <Task />
       </div>
-      {/* current week task done */}
       <Container
         totalTimeSpent={`${total.hours}:${total.minutes}:${total.seconds}`}
       >

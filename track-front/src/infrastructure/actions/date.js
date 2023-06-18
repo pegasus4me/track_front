@@ -59,4 +59,3 @@ export function convertDate(date) {
 }   
 
 
-console.log(convertDate("2023-06-11T10:26:01.000Z"))

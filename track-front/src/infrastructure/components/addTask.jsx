@@ -28,7 +28,7 @@ const Task = () => {
 
   useEffect(() => {
     dispatch(startTimer({ hours, minutes, seconds }));
-    // dispatch(incrementTimer({ hours, minutes, seconds }));
+    // dispatch(incrementTimer({ hours, minutes, seconds })); // counter fait maison
   }, [dispatch, isRunning, hours, minutes, seconds]);
   
   const stop = async () => {
