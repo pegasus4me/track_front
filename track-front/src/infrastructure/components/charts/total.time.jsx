@@ -1,20 +1,20 @@
 import React, { useState, useEffect } from "react";
 import {
-  AreaChart,
-  Area,
+  BarChart,
+  Bar,
   XAxis,
   YAxis,
   CartesianGrid,
   Tooltip,
-  ResponsiveContainer,
+  Legend,
 } from "recharts";
 
-import { totalSpend } from "../../actions/totalTimeSpend";
 import { getAllTask } from "../../api/task";
 import LoadSpinner from "../load.spinner";
-
+import { converDurationToNumber } from "../../actions/totalTimeSpend";
 // display le total Time passé sur toutes les task
 const TotalTime = () => {
+  
   const [data, setData] = useState([]);
   const [spinner, setSpinner] = useState(<LoadSpinner />);
 
@@ -30,42 +30,39 @@ const TotalTime = () => {
         return {
           taskid: task.id,
           name: task.notes,
-          time: task.time_spend,
+          duration: converDurationToNumber(task.time_spend).slice(5, 8),
+          time : task.time_spend
         };
       });
       setData(newData);
+      console.log(newData)
     } catch (error) {
       console.error(error);
     }
   };
-
   return (
     <div>
       {data.length !== 0 ? (
-        <ResponsiveContainer width="100%" height="100%">
-          <AreaChart
-            width={500}
-            height={400}
-            data={data}
-            margin={{
-              top: 10,
-              right: 30,
-              left: 0,
-              bottom: 0,
-            }}
-          >
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="name" />
-            <YAxis />
-            <Tooltip />
-            <Area
-              type="monotone"
-              dataKey="uv"
-              stroke="#8884d8"
-              fill="#8884d8"
-            />
-          </AreaChart>
-        </ResponsiveContainer>
+         <BarChart
+        className="w-full"
+          width={1000}
+          height={300}
+          data={data}
+          margin={{
+            top: 5,
+            right: 30,
+            left: 20,
+            bottom: 5,
+          }}
+        >
+          <CartesianGrid strokeDasharray="3 3" />
+          <XAxis dataKey="name" />
+          <YAxis />
+          <Tooltip />
+          <Legend />
+          <Bar dataKey="duration" fill="#8884d8" />
+        </BarChart>
+       
       ) : (
         spinner
       )}
