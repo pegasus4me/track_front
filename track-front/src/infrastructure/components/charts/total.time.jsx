@@ -30,7 +30,7 @@ const TotalTime = () => {
         return {
           taskid: task.id,
           name: task.notes,
-          duration: converDurationToNumber(task.time_spend).slice(5, 8),
+          duration: converDurationToNumber(task.time_spend),
           time : task.time_spend
         };
       });

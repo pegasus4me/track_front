@@ -36,11 +36,5 @@ export function totalSpend(value) {
 export function converDurationToNumber(time) {
   const [hours, minutes, seconds] = time.split(":");
   return parseInt(hours) + parseInt(minutes)  / 60 + parseInt(seconds) / 3600 ;
-  // return [
-  //   {
-  //     hours: parseInt(hours),
-  //     minutes: parseInt(minutes),
-  //     seconds: parseInt(seconds),
-  //   },
-  // ];
+  // convertir en millisecondes   
 }
