@@ -27,15 +27,16 @@ const TotalTime = () => {
       let res = await getAllTask();
 
       let newData = res.map((task) => {
+
+        const durationperTask = converDurationToNumber(task.time_spend) / 60000;
         return {
           taskid: task.id,
           name: task.notes,
-          duration: converDurationToNumber(task.time_spend),
+          'duration/min': durationperTask.toFixed(2),
           time : task.time_spend
         };
       });
       setData(newData);
-      console.log(newData)
     } catch (error) {
       console.error(error);
     }
@@ -57,10 +58,10 @@ const TotalTime = () => {
         >
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="name" />
-          <YAxis />
+          <YAxis dataKey="duration/min" />
           <Tooltip />
           <Legend />
-          <Bar dataKey="duration" fill="#8884d8" />
+          <Bar dataKey="duration/min" fill="#8884d8" />
         </BarChart>
        
       ) : (

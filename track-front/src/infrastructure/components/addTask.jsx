@@ -47,7 +47,6 @@ const Task = () => {
         tag: tag,
       };
 
-      console.log('donnes',data)
       await addNewTask(data);
       // dispatch(stopTimer());
       reset(); // Réinitialise le compteur

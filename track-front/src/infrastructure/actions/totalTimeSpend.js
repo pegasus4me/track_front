@@ -35,6 +35,27 @@ export function totalSpend(value) {
 
 export function converDurationToNumber(time) {
   const [hours, minutes, seconds] = time.split(":");
-  return parseInt(hours) + parseInt(minutes)  / 60 + parseInt(seconds) / 3600 ;
-  // convertir en millisecondes   
+  const totalMilliseconds = (parseInt(hours) * 3600 + parseInt(minutes) * 60 + parseInt(seconds)) * 1000;  // convertir en millisecondes
+  return totalMilliseconds;
 }
+
+export function sumTimeSpendToTimeEnd(time_end, time_spend) {
+  const date = time_end.slice(0,10);
+  const sliceTimeEnd =time_end.slice(10).split(":");
+  const [hours, minutes, seconds] = sliceTimeEnd;
+  const totalSeconds = parseInt(hours) * 3600 + parseInt(minutes) * 60 + parseInt(seconds);
+  // time_spend
+  const sliceTimeSpend = time_spend.split(":");
+  const [hoursSpent, minutesSpent, secondsSpent] = sliceTimeSpend;
+  const totalSecondsSpent = parseInt(hoursSpent) * 3600 + parseInt(minutesSpent) * 60 + parseInt(secondsSpent);
+
+  const newTimePassed = totalSeconds + totalSecondsSpent;
+  
+  const hoursResult = Math.floor(newTimePassed / 3600);
+  const minutesResult = Math.floor((newTimePassed % 3600) / 60);
+  const secondsResult = newTimePassed % 60;
+
+  return  `${date} ${hoursResult}:${minutesResult}:${secondsResult}`
+}
+
+console.log(sumTimeSpendToTimeEnd("2023-06-19 12:14:32", "01:35:45" ))

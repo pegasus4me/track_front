@@ -23,4 +23,4 @@ SRC
     - trier par date et les display sur tasks
     
 
-    :: le redux sert a rien dans l'app pour l'instat partie task et gestion du temps
+CHANGELOG 22/06/23 - FIX NEW TIME_SPEND DISPLAY ON EDIT TASK  

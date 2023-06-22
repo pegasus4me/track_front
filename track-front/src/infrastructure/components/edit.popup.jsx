@@ -5,8 +5,10 @@ import { updateTaskById } from "../api/task";
 import { convertDate } from "../actions/date";
 import Tags from "./tags";
 import toast, { Toaster } from "react-hot-toast";
+import { sumTimeSpendToTimeEnd } from "../actions/totalTimeSpend";
 
 const Edit = ({ currentTaskId, closeModal, currentTask }) => {
+  
   const [taskName, setTaskName] = useState("");
   const [hour, setHour] = useState("");
   const [minute, setMinute] = useState("");
@@ -23,13 +25,16 @@ const Edit = ({ currentTaskId, closeModal, currentTask }) => {
   }, []);
 
   const updateTask = async () => {
+
+    // update new time_end after updating our new time_spend to be sync
+    let newTimeEnd = sumTimeSpendToTimeEnd(convertDate(end), `${hour}:${minute}:${second}`)
     try {
       let updatetedTask = {
         notes: taskName,
         tag: tag,
         time_spend: `${hour}:${minute}:${second}`,
         time_start: convertDate(start),
-        time_end: convertDate(end),
+        time_end: newTimeEnd,
         timezone: timeZone,
       };
       const updateData = await updateTaskById(currentTaskId, updatetedTask);
