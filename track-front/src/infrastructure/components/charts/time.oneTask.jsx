@@ -11,7 +11,7 @@ const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
 
 const TimeTask = () => {
   const [data, setData] = useState([]);
-  console.log("ododod", data);
+  console.log("odododd", data);
   useEffect(() => {
     fetchTask();
   }, []);
@@ -19,7 +19,6 @@ const TimeTask = () => {
   const fetchTask = async () => {
     try {
       let res = await getAllTask();
-
       let newData = res.map((task) => {
 
         const durationperTask = converDurationToNumber(task.time_spend) / 60000;
@@ -51,6 +50,7 @@ const TimeTask = () => {
       >
         {data.map((entry, index) => (
           <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+        
         ))}
       </Pie>
     </PieChart>

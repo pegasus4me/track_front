@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { getUserData } from "../../infrastructure/api/auth";
 import { getAllTask } from "../../infrastructure/api/task";
+import { deleteTaskById } from "../../infrastructure/api/task";
+
 import Structure from "./structure";
 const Profile = () => {
 
@@ -16,6 +18,16 @@ const Profile = () => {
     getTasks();
   }, []);
 
+  async function deleteOne(id){
+    try {
+      // trouver la task par son nom 
+      // recuper son id et la delete 
+      let res  = await deleteTaskById(id);
+      console.log(res)
+    } catch (error) {
+      console.log(error)
+    }
+  }
   async function getName() {
     let getName = await getUserData();
     setName(getName.username);
@@ -36,6 +48,9 @@ const Profile = () => {
         timezone={timezone}
         role={role}
         values={task}
+        checked={() => {
+          task.map((task) => deleteOne(task.id));
+        }}
       />
     </>
   );
