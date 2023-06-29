@@ -5,27 +5,22 @@ import { deleteTaskById } from "../../infrastructure/api/task";
 
 import Structure from "./structure";
 const Profile = () => {
-
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [timezone, setTimezone] = useState("");
   const [role, setRole] = useState("");
-  const [task, setTask] = useState([])
+  const [task, setTask] = useState([]);
   
-
   useEffect(() => {
     getName();
     getTasks();
   }, []);
 
-  async function deleteOne(id){
+  async function deleteOne(id) {
     try {
-      // trouver la task par son nom 
-      // recuper son id et la delete 
-      let res  = await deleteTaskById(id);
-      console.log(res)
+      await deleteTaskById(id);
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   }
   async function getName() {
@@ -35,12 +30,12 @@ const Profile = () => {
     setTimezone(getName.timezone);
     setRole(getName.role);
   }
-  async function getTasks() {
-       const task = await getAllTask()
-       setTask(task)
 
+  async function getTasks() {
+    const task = await getAllTask();
+    setTask(task);
   }
-    return (
+  return (
     <>
       <Structure
         username={name}
@@ -48,8 +43,9 @@ const Profile = () => {
         timezone={timezone}
         role={role}
         values={task}
-        checked={() => {
-          task.map((task) => deleteOne(task.id));
+        checked={(taskId) => {
+          const tasktodelete = task.find((t) => t.id === taskId);
+          deleteOne(tasktodelete.id);
         }}
       />
     </>

@@ -18,7 +18,7 @@ const Structure = ({email, username, role, timezone, values, checked}) => {
                                 <p className='text-center font-medium text-blue-500'>{val.tag}</p>
                             </div>
                         })
-                    ): <p>no tags</p>}
+                    ): <p className='text-center font-medium text-indigo-800'>no tags</p>}
 
                 </div>
                 <div className="col-span-3 row-span-4 border rounded-md hover:shadow-md p-2">
@@ -53,13 +53,18 @@ const Structure = ({email, username, role, timezone, values, checked}) => {
                     <h4 className="font-display text-center text-slate-600 p-1 text-lg"> 💫 tasks</h4>
                     {Array.isArray(values) && values.length !== 0 ? (
                         values.map((val, index) => {
-                            return <div className='flex p-2' key={index}>
-                                 <input type="checkbox" name="" id="" className='mr-2' onClick={checked}/>
+                           console.log(val)
+                           return <div className='flex p-2' key={index}>
+                        
+                                 <input type="checkbox" name="" id="" className='mr-2' onClick={() => checked(val.id)} key={index}/>
                                 <p className='text-center font-medium text-blue-500'>{val.notes}</p>
                             </div>
                         })
-                    ): <p>no tags</p>}
+                    ): <p className='text-center font-medium text-indigo-800'>no tags</p>}
                 </div>
+            </div>
+            <div className='p-2'> 
+                <h3 className='font-medium border-b-2 border-blue-200'>history</h3>
             </div>
         </div>
         

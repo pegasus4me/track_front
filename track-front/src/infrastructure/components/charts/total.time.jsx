@@ -17,7 +17,6 @@ const TotalTime = () => {
   
   const [data, setData] = useState([]);
   const [spinner, setSpinner] = useState(<LoadSpinner />);
-console.log("safoan", data);
   useEffect(() => {
     fetchTask();
   }, []);

@@ -6,7 +6,6 @@ export function totalSpend(value) {
   if (Array.isArray(value) && value.length !== 0) {
     value.map((val) => {
       const [hours, minutes, seconds] = val.time_spend.split(":");
-      // totalHours = parseInt(seconds)
       h += parseInt(hours);
       min += parseInt(minutes);
       if (min >= 60) {
@@ -19,12 +18,6 @@ export function totalSpend(value) {
         min++;
       }
     });
-  } else {
-    return {
-      hours: 0,
-      minutes: 0,
-      seconds: 0,
-    };
   }
   return {
     hours: h,
@@ -58,4 +51,3 @@ export function sumTimeSpendToTimeEnd(time_end, time_spend) {
   return  `${date} ${hoursResult}:${minutesResult}:${secondsResult}`
 }
 
-console.log(sumTimeSpendToTimeEnd("2023-06-19 12:14:32", "01:35:45" ))
