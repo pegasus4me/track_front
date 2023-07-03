@@ -41,7 +41,7 @@ const TotalTime = () => {
     }
   };
   return (
-    <div>
+    <div className="flex justify-center p-3">
       {data.length !== 0 ? (
          <BarChart
         className="w-full"

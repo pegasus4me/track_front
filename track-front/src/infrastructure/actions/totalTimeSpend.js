@@ -51,3 +51,9 @@ export function sumTimeSpendToTimeEnd(time_end, time_spend) {
   return  `${date} ${hoursResult}:${minutesResult}:${secondsResult}`
 }
 
+
+console.log(totalSpend([
+  {id: 117, user_id: 23, time_start: '2023-06-29T13:16:45.000Z', time_end: '2023-06-29T13:16:48.000Z', time_spend: '00:00:03'},
+  {id: 119, user_id: 23, time_start: '2023-07-03T18:45:03.000Z', time_end: '2023-07-03T18:45:08.000Z', time_spend: '00:00:05'},
+  {id: 120, user_id: 23, time_start: '2023-07-03T19:00:27.000Z', time_end: '2023-07-03T19:00:33.000Z', time_spend: '00:10:06'}
+  ]))

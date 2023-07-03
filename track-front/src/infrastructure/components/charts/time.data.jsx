@@ -1,35 +1,34 @@
-import React, { useState, useEffect } from 'react';
-import { getAllTask } from '../../api/task';
-import { totalSpend } from '../../actions/totalTimeSpend';
+import React, { useState, useEffect } from "react";
+import { getAllTask } from "../../api/task";
+import { totalSpend } from "../../actions/totalTimeSpend";
 const TimeData = () => {
+  const [timeSpend, setTotalTimeSpend] = useState({});
 
-    const [totalTime, settotalTime] = useState([]);
+  useEffect(() => {
+    total();
+  }, [getAllTask]);
 
-    useEffect(() => {
-       total() 
-    },[])
-
-    let a = totalSpend(totalTime)
-    console.log(a)
-    const total = async() => {
-            try {
-                let res = await getAllTask()
-                res.map((task) => {
-                    settotalTime(...totalTime,[task])
-                })
-            } catch (error) {
-                console.error(error)
-            }
+  const total = async () => {
+    try {
+      let res = await getAllTask();
+      let totalT = totalSpend(res);
+      setTotalTimeSpend(totalT);
+    } catch (error) {
+      console.error(error);
     }
-    
-    return (
-        // recuperer les valeurs depuis le back sortir le total de temps passé 
-        <>
-            <div className='p-2'>
-                <p>total time passed :</p>
-            </div>
-        </>
-    );
-}
+  };
+
+  return (
+    // recuperer les valeurs depuis le back sortir le total de temps passé
+    <>
+      <div className="p-2">
+        <p className="text-center font-medium">
+          total time passed : {timeSpend.hours}:{timeSpend.minutes}:
+          {timeSpend.seconds}
+        </p>
+      </div>
+    </>
+  );
+};
 
 export default TimeData;
